@@ -1,0 +1,15 @@
+telegraf:
+  agent:
+    hostname: foobar
+  global_tags:
+    env: staging
+  inputs:
+    -
+      plugin_name: redis
+      servers:
+        - "tcp://localhost:6379"
+  outputs:
+    -
+      plugin_name: librato
+      api_user: foo@bar.com
+      api_token: secret

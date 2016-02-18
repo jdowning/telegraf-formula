@@ -1,0 +1,39 @@
+telegraf:
+  version: 0.10.3-1
+  indent: 2
+  agent:
+    hostname: ""
+    interval: 10s
+    round_interval: "true"
+    metric_buffer_limit: 10000
+    flush_buffer_when_full: "true"
+    collection_jitter: 0s
+    flush_interval: 10s
+    flush_jitter: 0s
+    debug: "false"
+    quiet: "false"
+  inputs:
+    -
+      plugin_name: cpu
+      percpu: true
+      totalcpu: true
+      drop:
+        - "time_*"
+    -
+      plugin_name: disk
+    -
+      plugin_name: diskio
+    -
+      plugin_name: mem
+    -
+      plugin_name: swap
+    -
+      plugin_name: system
+
+  outputs:
+    -
+      plugin_name: influxdb
+      urls:
+        - http://localhost:8086
+      database: telegraf
+      precision: s
