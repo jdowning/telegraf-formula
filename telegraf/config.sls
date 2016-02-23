@@ -13,6 +13,16 @@ telegraf-config:
     - require:
       - sls: telegraf.install
 
+telegraf-system-inputs:
+  file.managed:
+    - name: /etc/telegraf/telegraf.d/system.conf
+    - source: salt://telegraf/files/system.conf
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - sls: telegraf.install
+
 {%- if telegraf.inputs is defined %}
 telegraf-inputs:
   file.managed:
