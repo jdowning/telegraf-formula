@@ -13,6 +13,7 @@ telegraf-config:
     - require:
       - sls: telegraf.install
 
+{%- if telegraf.use_system_inputs == True %}
 telegraf-system-inputs:
   file.managed:
     - name: /etc/telegraf/telegraf.d/system.conf
@@ -22,6 +23,7 @@ telegraf-system-inputs:
     - mode: 644
     - require:
       - sls: telegraf.install
+{%- endif %}
 
 {%- if telegraf.inputs is defined %}
 telegraf-inputs:
