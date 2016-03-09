@@ -8,6 +8,8 @@ telegraf:
       plugin_name: redis
       servers:
         - "tcp://localhost:6379"
+      tags:
+        az: us-east-1
   outputs:
     -
       plugin_name: librato

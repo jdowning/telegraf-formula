@@ -44,17 +44,26 @@
   {{- output_indented(col, ("[[" + plugin_type + "." + plugin.plugin_name + "]]")) }}
   {%- set col = col + telegraf.indent %}
   {%- for key, value in plugin.items() %}
-    {%- if key == 'plugin_name' %} {#skip plugin_name#}
+    {%- if key == "plugin_name" %} {#skip plugin_name#}
     {%- elif value is sameas false or value is sameas true or value is number %} {#boolean or integers#}
       {{- output_indented(col, (key + ' = ' + value|string|lower)) }}
     {%- elif value is string or value is number %} {#strings#}
       {{- output_indented(col, (key + ' = "' + value|string + '"')) }}
     {%- elif value is iterable %} {#arrays#}
-      {{- output_indented(col, key + ' = [') -}}
-      {%- for item in value -%}
-        "{{ item }}"{%- if loop.last == false -%},{%- endif -%}
-      {%- endfor -%}
-      ]
+      {%- if key == "tags" %}
+        {{- output_indented(col, ("[" + plugin_type + "." + plugin.plugin_name + ".tags]")) }}
+        {%- set col = col + telegraf.indent %}
+          {%- for k, v in value.items() %}
+            {{- output_indented(col, (k + ' = "' + v|string + '"')) }}
+          {%- endfor -%}
+        {%- set col = col - telegraf.indent %}
+      {%- else %}
+        {{- output_indented(col, key + ' = [') -}}
+        {%- for item in value -%}
+          "{{ item }}"{%- if loop.last == false -%},{%- endif -%}
+        {%- endfor -%}
+        ]
+      {%- endif %}
     {%- endif %}
   {%- endfor %}
 {#line break#}
