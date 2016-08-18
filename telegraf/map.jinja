@@ -3,11 +3,11 @@
 {% set os_map = salt['grains.filter_by']({
     'Debian': {
       'pkgsuffix': '_amd64.deb',
-      'source_hash': '46da6a3f35e15de9c68091fdb87b0282',
+      'source_hash': '128ac6845f12b5001706a217823dca58',
     },
     'RedHat': {
       'pkgsuffix': '.x86_64.rpm',
-      'source_hash': '7aef4869f03ed916544acee872c6d141',
+      'source_hash': '90388d5dc0e4c3fd86341fcf6bbbd48d',
     }
   }
   , grain="os_family"

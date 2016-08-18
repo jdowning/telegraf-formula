@@ -1,4 +1,6 @@
 telegraf:
+  version: 0.13.2
+  source_hash: 128ac6845f12b5001706a217823dca58
   agent:
     hostname: foobar
   global_tags:
