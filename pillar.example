@@ -1,4 +1,8 @@
 telegraf:
+  version: 0.13.2
+  source_hash: '90388d5dc0e4c3fd86341fcf6bbbd48d'
+  pkgname: "telegraf-"
+  pkguri: 'https://dl.influxdata.com/telegraf/releases'
   agent:
     hostname: foobar
   global_tags:
