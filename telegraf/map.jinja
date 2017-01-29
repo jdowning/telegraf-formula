@@ -47,9 +47,11 @@
   {%- set col = col + telegraf.indent %}
   {%- for key, value in plugin.items() %}
     {%- if key == "plugin_name" %} {#skip plugin_name#}
-    {%- elif value is sameas false or value is sameas true or value is number %} {#boolean or integers#}
+    {%- elif value is sameas false or value is sameas true %} {#boolean#}
       {{- output_indented(col, (key + ' = ' + value|string|lower)) }}
-    {%- elif value is string or value is number %} {#strings#}
+    {%- elif value is number or key =="percentile" %} {#numbers or percentile#}
+      {{- output_indented(col, (key + ' = ' + value|string)) }}
+    {%- elif value is string %} {#strings#}
       {{- output_indented(col, (key + ' = "' + value|string + '"')) }}
     {%- elif value is iterable %} {#arrays#}
       {%- if key == "tags" %}
