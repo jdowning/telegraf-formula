@@ -49,7 +49,7 @@
     {%- if key == "plugin_name" %} {#skip plugin_name#}
     {%- elif value is sameas false or value is sameas true %} {#boolean#}
       {{- output_indented(col, (key + ' = ' + value|string|lower)) }}
-    {%- elif value is number or key =="percentile" %} {#numbers or percentile#}
+    {%- elif value is number or key == "percentiles" %} {#numbers or percentiles#}
       {{- output_indented(col, (key + ' = ' + value|string)) }}
     {%- elif value is string %} {#strings#}
       {{- output_indented(col, (key + ' = "' + value|string + '"')) }}
